@@ -1,0 +1,16 @@
+%h2= "#{@user.name}'s profile"
+
+%strong e-mail: 
+%p= @user.email
+
+- unless @groups.empty?
+  %strong groups:
+  %ul
+    = render @groups
+
+- if @user == current_user
+  - unless @invitations.empty?
+    %strong invitations:
+    %ul
+      = render :partial => 'invitation', :collection => @invitations, 
+        :locals => { :membership => @membership, :user => @user }

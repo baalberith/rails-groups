@@ -1,0 +1,17 @@
+%h2= "#{@group.name} group profile"
+
+%strong description: 
+%p= @group.description
+
+- unless @users.empty?
+  %strong users:
+  %ul
+    = render @users
+    
+- if @group.admin?(current_user)
+  %strong uninvited:
+  %p
+    = form_for @invitation, :url => invite_group_path(@group) do |f|
+      - uninvited = @uninvited_users.map { |u| [u.email, u.id] }
+      = f.select :user_id, options_for_select(uninvited)
+      = f.submit 'Invite', :disabled => uninvited.empty?

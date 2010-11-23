@@ -1,4 +1,20 @@
 Groups::Application.routes.draw do
+  devise_for :users
+  
+  resources :users do
+    member do
+      post :invite
+    end
+  end
+  
+  resources :groups do
+    member do
+      post :invite
+    end
+  end
+
+  root :to => "pages#home"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,6 @@
+%li
+  = form_for membership, :url => invite_user_path(user) do |f|
+    = link_to invitation.group.name, group_path(invitation.group)
+    = f.select(:accept, options_for_select([["Accept", 1], ["Reject", 0]]))
+    = hidden_field_tag :invitation, invitation.id
+    = f.submit "OK"
